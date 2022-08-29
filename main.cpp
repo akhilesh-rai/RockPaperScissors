@@ -94,6 +94,23 @@ GAMERES DidUserWin(const int user, const int comp)
     }
 }
 
+bool QuitGame(char in)
+{
+    bool res;
+    if(   ( in == 'r')
+       || ( in == 'p')
+       || ( in == 's')   )
+    {
+        res = false;
+    }
+    else
+    {
+        res = true;
+    }
+
+    return res;
+}
+
 int main()
 {
     int count_win = 0;
@@ -103,22 +120,30 @@ int main()
 
     while(true)
     {
-        cout << "*********************************************************"<<endl;
+        cout << "************************NEW GAME*********************************"<<endl;
         cout << "Lets play rock, paper , scissors" << endl;
         cout << "enter r for rock, p for paper or s for scissors" << endl;
+        cout << "enter any other key to QUIT" << endl;
 
         char input;
 
         cin >> input;
 
-        cout << "user input: " << input << endl;
+        cout << "User input    : " << input << endl;
+
+        if( true == QuitGame(input))
+        {
+            cout<<"Game Quit!!"<<endl;
+            break;
+        }
 
         int outputComp = roll(1,4);
 
         char compRes = mapToChar(outputComp);
-        cout << "computer says: " << compRes << endl;
+        cout << "Computer plays: " << compRes << endl;
 
-        cout<< "Player:" << SpellGameRes(DidUserWin(mapToInt(input), mapToInt(compRes))) << endl;
+        cout<<"************************RESULT*********************************"<<endl;
+        cout<< "Player: " << SpellGameRes(DidUserWin(mapToInt(input), mapToInt(compRes))) << endl;
 
         GAMERES result = DidUserWin(mapToInt(input), mapToInt(compRes));
 
@@ -131,9 +156,9 @@ int main()
         else
             cout_error++;
         
-        cout << "win count: " << count_win << endl;
-        cout << "loose count: " << count_loose << endl;
-        cout << "draw count: " << count_draw << endl;
+        cout << "Won   : " << count_win << endl;
+        cout << "Lost  : " << count_loose << endl;
+        cout << "Drew  : " << count_draw << endl;
 
     }
 
